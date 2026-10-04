@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore interactive surgical anatomy with SurgicalAI."
+    />
+    <meta name="theme-color" content="#070c14" />
+    <title>SurgicalAI — Surgical intelligence, reimagined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/script.js" defer></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar">
+        <a class="brand" href="#home" data-page-link="home" aria-label="SurgicalAI home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M16 2.8 28 9.5v13L16 29.2 4 22.5v-13L16 2.8Z" />
+              <path d="m4.5 9.8 11.5 6.7 11.5-6.7M16 16.5v12" />
+              <path d="m10 6.2 12 6.9v5.3" />
+            </svg>
+          </span>
+          <span>Surgical<span class="brand-accent">AI</span></span>
+        </a>
+        <button class="mobile-menu-button" id="mobile-menu-button" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+        <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="#home" data-page-link="home">Home</a>
+          <a class="nav-link" href="#assistant" data-page-link="assistant">AI Assistant</a>
+          <a class="nav-link" href="#explore" data-page-link="explore">3D Model View</a>
+          <a class="nav-link" href="#ar" data-page-link="ar">AR/VR View</a>
+          <a class="nav-link" href="#quizzes" data-page-link="quizzes">Quizzes</a>
+        </nav>
+        <button class="nav-qr-button" data-open-qr>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h5v5H3zM12 3h5v5h-5zM3 12h5v5H3zM12 12h2v2h-2zM15 12h2v5h-2zM12 16h2v1h-2z" /></svg>
+          <span>QR Studio</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="page active" id="page-home" data-page="home">
+          <div class="hero content-width">
+            <div class="hero-copy">
+              <div class="eyebrow"><span class="status-dot"></span> NEXT-GEN SURGICAL INTELLIGENCE</div>
+              <h1>Master surgical anatomy <span>with SurgicalAI.</span></h1>
+              <p class="hero-description">
+                Explore the human body in a whole new dimension. Study smarter
+                with immersive 3D anatomy, clinical AI, and augmented reality.
+              </p>
+              <div class="hero-actions">
+                <button class="button button-primary" id="get-started">
+                  Get started <span aria-hidden="true">↗</span>
+                </button>
+                <button class="button button-quiet" data-page-link="explore">
+                  Explore models <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </div>
+            <div class="hero-art">
+              <div class="art-orbit orbit-one"></div>
+              <div class="art-orbit orbit-two"></div>
+              <div class="art-crosshair crosshair-one"></div>
+              <div class="art-crosshair crosshair-two"></div>
+              <div class="anatomy-preview">
+                <div class="preview-topline"><span><i></i> LIVE ANATOMY PREVIEW</span><span>FIG. 01</span></div>
+                <div class="preview-figure">
+                  <svg class="torso-illustration" viewBox="0 0 300 360" role="img" aria-label="Stylized 3D illustration of a human thorax and lungs">
+                    <defs>
+                      <linearGradient id="bodyGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#163456" /><stop offset="1" stop-color="#0b1628" /></linearGradient>
+                      <linearGradient id="lungGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00d2ff" stop-opacity=".8" /><stop offset="1" stop-color="#3c76fa" stop-opacity=".28" /></linearGradient>
+                      <filter id="softGlow"><feGaussianBlur stdDeviation="7" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+                    </defs>
+                    <path d="M112 28c7 16 7 32 1 47-9 21-40 26-51 48-12 23-15 65-24 96-10 37-20 68-10 86 11 20 43 24 122 24s111-4 122-24c10-18 0-49-10-86-9-31-12-73-24-96-11-22-42-27-51-48-6-15-6-31 1-47-15 9-29 13-38 13s-23-4-38-13Z" fill="url(#bodyGlow)" stroke="#4b82a7" stroke-opacity=".6" stroke-width="1.4" />
+                    <path d="M150 54v241M113 113c12 18 25 28 37 30 12-2 25-12 37-30M150 143v111" fill="none" stroke="#7cb8d4" stroke-opacity=".55" stroke-width="2" />
+                    <path d="M145 121c-18-24-44-14-50 12-6 24-4 55 7 74 8 13 23 13 34 1 11-12 15-31 15-56 0-13-1-23-6-31Zm10 0c18-24 44-14 50 12 6 24 4 55-7 74-8 13-23 13-34 1-11-12-15-31-15-56 0-13 1-23 6-31Z" fill="url(#lungGlow)" stroke="#00d2ff" stroke-width="1.3" filter="url(#softGlow)" />
+                    <path d="M150 119v22m0 0-22 23m22-23 22 23M150 141v35m0 0-19 20m19-20 19 20" fill="none" stroke="#b7f3ff" stroke-width="2.2" stroke-linecap="round" />
+                    <circle cx="150" cy="141" r="3" fill="#e7fbff" /><circle cx="128" cy="164" r="2.5" fill="#a2edff" /><circle cx="172" cy="164" r="2.5" fill="#a2edff" />
+                    <path d="M92 126h-28m143 0h28M95 180H53m152 0h42" stroke="#00d2ff" stroke-opacity=".7" stroke-dasharray="3 5" />
+                    <circle cx="64" cy="126" r="3" fill="#00d2ff" /><circle cx="236" cy="126" r="3" fill="#00d2ff" />
+                  </svg>
+                  <div class="anatomy-label label-left"><span class="label-line"></span><span>BRONCHI</span></div>
+                  <div class="anatomy-label label-right"><span>LEFT LUNG</span><span class="label-line"></span></div>
+                  <div class="figure-index">A / 01</div>
+                </div>
+                <div class="preview-footer"><span><i class="pulse-dot"></i> MODEL RENDERED</span><span>3D · INTERACTIVE</span></div>
+              </div>
+              <div class="floating-data data-top"><span class="data-icon">✳</span><span><b>98.7%</b><small>MODEL ACCURACY</small></span></div>
+              <div class="floating-data data-bottom"><span class="data-wave">⌁</span><span><b>Real-time</b><small>AI ANALYSIS</small></span></div>
+            </div>
+          </div>
+          <div class="home-lower content-width">
+            <span class="section-overline">THE ANATOMY LAB, REIMAGINED</span>
+            <div class="feature-strip">
+              <article class="mini-feature"><span class="mini-icon">◈</span><div><h3>See every layer</h3><p>High-fidelity 3D models, built for deeper understanding.</p></div></article>
+              <article class="mini-feature"><span class="mini-icon">✳</span><div><h3>Ask your AI</h3><p>Clinical context and anatomy, ready when you are.</p></div></article>
+              <article class="mini-feature"><span class="mini-icon">⌗</span><div><h3>Learn in context</h3><p>Take your study into the real world with AR anchors.</p></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="page content-width interior-page" id="page-explore" data-page="explore">
+          <div class="page-heading">
+            <div><div class="eyebrow"><span class="status-dot"></span> ANATOMY LIBRARY</div><h1>Explore the human body.</h1><p>Study structure, function, and clinical context in one immersive space.</p></div>
+            <button class="button button-outline" data-open-qr><span>⌗</span> Create AR anchor</button>
+          </div>
+          <div class="library-toolbar"><div class="category-tabs" role="tablist" aria-label="Anatomy categories">
+            <button class="category-tab selected" data-category="ALL" role="tab" aria-selected="true">ALL <span>05</span></button>
+            <button class="category-tab" data-category="RESPIRATORY" role="tab" aria-selected="false">RESPIRATORY</button>
+            <button class="category-tab" data-category="NEUROLOGY" role="tab" aria-selected="false">NEUROLOGY</button>
+            <button class="category-tab" data-category="CARDIOLOGY" role="tab" aria-selected="false">CARDIOLOGY</button>
+            <button class="category-tab" data-category="VISUAL" role="tab" aria-selected="false">VISUAL</button>
+            <button class="category-tab" data-category="ORTHOPEDIC" role="tab" aria-selected="false">ORTHOPEDIC</button>
+          </div><span class="library-count"><b id="model-count">05</b> MODELS</span></div>
+          <div class="model-grid">
+            <article class="model-card" data-category="RESPIRATORY" data-anatomy="respiratory system" data-model="respiratory">
+              <div class="model-image respiratory-image"><model-viewer class="model-card-preview" data-model-preview="respiratory" alt="3D respiratory system model preview" camera-controls auto-rotate interaction-prompt="none" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent"></model-viewer><span class="model-tag">RESPIRATORY</span><span class="image-corner">01 / 05</span><span class="image-caption">PULMONARY SYSTEM · ANTERIOR</span></div>
+              <div class="model-info"><div class="model-title-row"><div><h2>Respiratory System</h2><span class="model-subtitle">Pulmonary anatomy</span></div><span class="model-arrow">↗</span></div><p>Trace the path of airflow from the upper airway to the alveoli.</p><div class="model-card-footer"><span class="model-level"><i></i> 12 STRUCTURES</span><button class="text-button analyze-button" data-analyze="respiratory system">ANALYZE STRUCTURE <span>→</span></button></div></div>
+            </article>
+            <article class="model-card" data-category="NEUROLOGY" data-anatomy="cerebral cortex" data-model="brain">
+              <div class="model-image brain-image"><model-viewer class="model-card-preview" data-model-preview="brain" alt="3D cerebral cortex model preview" camera-controls auto-rotate interaction-prompt="none" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent"></model-viewer><span class="model-tag">NEUROLOGY</span><span class="image-corner">02 / 05</span><span class="image-caption">CEREBRAL CORTEX · LATERAL</span></div>
+              <div class="model-info"><div class="model-title-row"><div><h2>Cerebral Cortex</h2><span class="model-subtitle">Central nervous system</span></div><span class="model-arrow">↗</span></div><p>Navigate the lobes and discover how each shapes perception and action.</p><div class="model-card-footer"><span class="model-level"><i></i> 16 STRUCTURES</span><button class="text-button analyze-button" data-analyze="cerebral cortex">ANALYZE STRUCTURE <span>→</span></button></div></div>
+            </article>
+            <article class="model-card" data-category="CARDIOLOGY" data-anatomy="human heart" data-model="heart">
+              <div class="model-image heart-image"><model-viewer class="model-card-preview" data-model-preview="heart" alt="3D human heart model preview" camera-controls auto-rotate interaction-prompt="none" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent"></model-viewer><span class="model-tag">CARDIOLOGY</span><span class="image-corner">03 / 05</span><span class="image-caption">HUMAN HEART · ANTERIOR</span></div>
+              <div class="model-info"><div class="model-title-row"><div><h2>Human Heart</h2><span class="model-subtitle">Cardiovascular anatomy</span></div><span class="model-arrow">↗</span></div><p>Follow the cardiac cycle through chambers, valves, and vessels.</p><div class="model-card-footer"><span class="model-level"><i></i> 18 STRUCTURES</span><button class="text-button analyze-button" data-analyze="human heart">ANALYZE STRUCTURE <span>→</span></button></div></div>
+            </article>
+            <article class="model-card" data-category="VISUAL" data-anatomy="ocular structure" data-model="eye">
+              <div class="model-image ocular-image"><model-viewer class="model-card-preview" data-model-preview="eye" alt="3D ocular structure model preview" camera-controls auto-rotate interaction-prompt="none" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent"></model-viewer><span class="model-tag">VISUAL</span><span class="image-corner">04 / 05</span><span class="image-caption">OCULAR STRUCTURE · LATERAL</span></div>
+              <div class="model-info"><div class="model-title-row"><div><h2>Ocular Structure</h2><span class="model-subtitle">Visual system</span></div><span class="model-arrow">↗</span></div><p>Explore the cornea, lens, retina, and optic nerve.</p><div class="model-card-footer"><span class="model-level"><i></i> 11 STRUCTURES</span><button class="text-button analyze-button" data-analyze="ocular structure">ANALYZE STRUCTURE <span>→</span></button></div></div>
+            </article>
+            <article class="model-card" data-category="ORTHOPEDIC" data-anatomy="human skeleton" data-model="skeleton">
+              <div class="model-image skeleton-image"><model-viewer class="model-card-preview" data-model-preview="skeleton" alt="3D human skeleton model preview" camera-controls auto-rotate interaction-prompt="none" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent"></model-viewer><span class="model-tag">ORTHOPEDIC</span><span class="image-corner">05 / 05</span><span class="image-caption">HUMAN SKELETON · ANTERIOR</span></div>
+              <div class="model-info"><div class="model-title-row"><div><h2>Human Skeleton</h2><span class="model-subtitle">Musculoskeletal anatomy</span></div><span class="model-arrow">↗</span></div><p>Review the axial skeleton and major weight-bearing bones.</p><div class="model-card-footer"><span class="model-level"><i></i> 206 BONES</span><button class="text-button analyze-button" data-analyze="human skeleton">ANALYZE STRUCTURE <span>→</span></button></div></div>
+            </article>
+          </div>
+          <div class="library-bottom"><span>MORE MODELS ARE BEING PREPARED FOR YOUR LAB</span><button class="text-button" data-open-qr>GENERATE AN AR ANCHOR <span>↗</span></button></div>
+        </section>
+
+        <section class="page content-width interior-page assistant-page" id="page-assistant" data-page="assistant">
+          <div class="page-heading"><div><div class="eyebrow"><span class="status-dot"></span> CLINICAL KNOWLEDGE ENGINE</div><h1>Your Medical &amp; Surgical Copilot</h1><p>Ask any question about human anatomy, medical conditions, symptoms, or surgical procedures.</p></div><span class="online-pill"><i></i> SYSTEM ONLINE</span></div>
+          <div class="chat-layout">
+            <aside class="chat-sidebar"><div class="sidebar-label">QUICK PROMPTS</div><button class="prompt-chip" data-prompt="Explain the human heart">Explain the human heart <span>↗</span></button><button class="prompt-chip" data-prompt="Walk me through the respiratory system">Walk me through the respiratory system <span>↗</span></button><button class="prompt-chip" data-prompt="What does the cerebral cortex do?">What does the cerebral cortex do? <span>↗</span></button><div class="chat-disclaimer"><span>✳</span><p>For educational use. Not a substitute for professional clinical judgment.</p></div></aside>
+            <section class="chat-panel" aria-label="Surgical AI chat"><div class="chat-header"><span class="system-icon">✳</span><div><strong>SURGICAL AI SYSTEM</strong><small>ANATOMY KNOWLEDGE · ONLINE</small></div><span class="chat-header-status"><i></i> READY</span></div>
+              <div class="chat-messages" id="chat-messages" aria-live="polite"><div class="message assistant-message"><span class="message-avatar">✳</span><div><span class="message-label">SURGICAL AI <time>NOW</time></span><div class="message-bubble">Welcome to the anatomy lab. Ask me about an organ or system and I’ll help you explore its structure and clinical context.</div><div class="suggestion-row"><button data-prompt="Explain the human heart">Human heart</button><button data-prompt="Explain the respiratory system">Respiratory system</button></div></div></div></div>
+              <form class="chat-compose" id="chat-form"><label class="sr-only" for="chat-input">Ask a medical or anatomical question</label><input id="chat-input" name="prompt" placeholder="Ask any medical or anatomical question..." autocomplete="off" required /><button type="submit" aria-label="Send message"><span>↑</span></button></form><div class="chat-footnote">AI-GENERATED CONTENT · ALWAYS VERIFY CLINICAL INFORMATION</div>
+            </section>
+          </div>
+        </section>
+
+        <section class="page content-width interior-page feature-page" id="page-ar" data-page="ar">
+          <div class="page-heading"><div><div class="eyebrow"><span class="status-dot"></span> SPATIAL ANATOMY LAB</div><h1>Bring anatomy into focus.</h1><p>Generate an AR anchor and place an anatomy reference wherever you study.</p></div></div>
+          <div class="virtual-bio">
+            <div class="virtual-qr-panel">
+              <div class="virtual-panel-heading"><span class="system-icon">⌗</span><div><strong>VIRTUAL_BIO</strong><small>WEBAR CONNECTION</small></div><span class="online-pill"><i></i> READY</span></div>
+              <div class="virtual-qr-content"><div class="virtual-qr-frame"><img id="virtual-qr-image" alt="QR code for the selected WebAR anatomy model" /><span id="virtual-qr-placeholder">SELECT A MODEL<br />TO GENERATE QR</span></div><div class="virtual-qr-copy"><div class="virtual-selected-model"><span class="virtual-model-thumbnail heart-icon" id="virtual-model-thumbnail"><model-viewer id="virtual-model-preview" alt="" camera-orbit="0deg 75deg 105%" interaction-prompt="none" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;--poster-color:transparent"></model-viewer><b id="virtual-thumb-fallback">♡</b></span><span><span class="feature-kicker">SCAN TO ENTER AR</span><h2 id="virtual-selected-name">Human Heart</h2></span></div><p>Open your phone camera and scan the code. Tap the link to load this anatomy model in your mobile browser.</p><span class="virtual-scan-status"><i></i> <span id="virtual-qr-status">QR LINK READY</span></span></div></div>
+              <div class="virtual-qr-foot"><span>CAMERA · SCAN · EXPLORE</span><span id="virtual-model-id">MODEL: HEART</span></div>
+            </div>
+            <div class="virtual-organ-panel"><div class="virtual-panel-heading"><div><strong>ANATOMY MODELS</strong><small>SELECT A MODEL TO SYNC ITS QR</small></div><span class="model-count-small">05 MODELS</span></div>
+              <div class="organ-grid">
+                <button class="organ-option active" data-organ="heart"><span class="organ-thumb organ-heart">♡</span><span><b>Human Heart</b><small>CARDIOLOGY</small></span><span class="organ-check">✓</span></button>
+                <button class="organ-option" data-organ="respiratory"><span class="organ-thumb organ-lungs">◉</span><span><b>Respiratory System</b><small>RESPIRATORY</small></span><span class="organ-check">✓</span></button>
+                <button class="organ-option" data-organ="brain"><span class="organ-thumb organ-brain">◌</span><span><b>Cerebral Cortex</b><small>NEUROLOGY</small></span><span class="organ-check">✓</span></button>
+                <button class="organ-option" data-organ="eye"><span class="organ-thumb organ-eye">◎</span><span><b>Ocular Structure</b><small>VISUAL</small></span><span class="organ-check">✓</span></button>
+                <button class="organ-option" data-organ="skeleton"><span class="organ-thumb organ-skeleton">♙</span><span><b>Human Skeleton</b><small>ORTHOPEDIC</small></span><span class="organ-check">✓</span></button>
+              </div>
+              <p class="virtual-hint"><span>ⓘ</span> QR links use your local network address when available. WebXR AR needs HTTPS; <code>localhost</code> on a phone refers to the phone itself.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="page ar-standalone-page" id="page-ar-standalone" data-page="ar-standalone">
+          <div class="standalone-header"><a class="brand" href="/" aria-label="SurgicalAI home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 2.8 28 9.5v13L16 29.2 4 22.5v-13L16 2.8Z"/><path d="m4.5 9.8 11.5 6.7 11.5-6.7M16 16.5v12"/></svg></span><span>Surgical<span class="brand-accent">AI</span></span></a><span class="online-pill"><i></i> WEBAR MODEL READY</span></div>
+          <div class="standalone-copy"><div class="eyebrow"><span class="status-dot"></span> MOBILE ANATOMY EXPERIENCE</div><h1 id="standalone-organ-name">Anatomy model</h1><p>Rotate and inspect the model, or launch AR to place it in your space.</p></div>
+          <model-viewer id="ar-model-viewer" alt="Interactive 3D anatomical model" ar ar-modes="webxr scene-viewer quick-look" camera-controls auto-rotate shadow-intensity="1" exposure="1" environment-image="neutral" interaction-prompt="auto" loading="eager">
+            <button slot="ar-button" class="button button-primary model-ar-button">View in your space <span>⌖</span></button>
+            <button class="ar-callout" slot="hotspot-one" data-position="0m 0.6m 0.2m" data-normal="0m 0m 1m">ANATOMICAL LANDMARK</button>
+            <button class="ar-callout" slot="hotspot-two" data-position="0.35m 0.1m 0.2m" data-normal="0m 0m 1m">STRUCTURE</button>
+            <button class="ar-callout" slot="hotspot-three" data-position="-0.3m -0.35m 0.2m" data-normal="0m 0m 1m">DETAIL</button>
+            <div slot="poster" class="model-poster"><span class="status-dot"></span> LOADING 3D ANATOMY…</div>
+          </model-viewer>
+          <div class="standalone-footer"><span>PINCH TO ZOOM · DRAG TO ROTATE</span><a href="/" class="text-button">SURGICALAI HOME ↗</a></div>
+        </section>
+
+        <section class="page content-width interior-page feature-page" id="page-quizzes" data-page="quizzes">
+          <div class="page-heading"><div><div class="eyebrow"><span class="status-dot"></span> ANATOMY KNOWLEDGE CHECK</div><h1>Practice every system.</h1><p>Choose a 3D anatomy model and challenge level. Each quiz has three questions.</p></div><span class="online-pill"><i></i> 05 MODELS · 03 LEVELS</span></div>
+          <div class="quiz-selection">
+            <div class="quiz-selector-heading"><span class="feature-kicker">01 / SELECT ANATOMY</span><span class="selection-hint">PICK A MODEL FROM THE 3D LIBRARY</span></div>
+            <div class="quiz-model-options" role="group" aria-label="Choose anatomy quiz">
+              <button class="quiz-model-option selected" data-quiz-model="heart"><span class="quiz-model-icon heart-icon">♡</span><span><b>Human Heart</b><small>CARDIOLOGY</small></span><i>✓</i></button>
+              <button class="quiz-model-option" data-quiz-model="respiratory"><span class="quiz-model-icon lung-icon">◉</span><span><b>Respiratory System</b><small>RESPIRATORY</small></span><i>✓</i></button>
+              <button class="quiz-model-option" data-quiz-model="brain"><span class="quiz-model-icon brain-icon">◌</span><span><b>Cerebral Cortex</b><small>NEUROLOGY</small></span><i>✓</i></button>
+              <button class="quiz-model-option" data-quiz-model="eye"><span class="quiz-model-icon eye-icon">◎</span><span><b>Ocular Structure</b><small>VISUAL</small></span><i>✓</i></button>
+              <button class="quiz-model-option" data-quiz-model="skeleton"><span class="quiz-model-icon skeleton-icon">♙</span><span><b>Human Skeleton</b><small>ORTHOPEDIC</small></span><i>✓</i></button>
+            </div>
+            <div class="quiz-level-heading"><span class="feature-kicker">02 / CHOOSE DIFFICULTY</span></div>
+            <div class="quiz-level-options" role="group" aria-label="Choose quiz difficulty">
+              <button class="quiz-level-option selected" data-quiz-level="easy"><span class="level-indicator easy-indicator">01</span><span><b>Easy</b><small>Core anatomy &amp; basic function</small></span><i>✓</i></button>
+              <button class="quiz-level-option" data-quiz-level="medium"><span class="level-indicator medium-indicator">02</span><span><b>Medium</b><small>Structures, pathways &amp; relationships</small></span><i>✓</i></button>
+              <button class="quiz-level-option" data-quiz-level="hard"><span class="level-indicator hard-indicator">03</span><span><b>Hard</b><small>Detailed clinical anatomy</small></span><i>✓</i></button>
+            </div>
+            <div class="quiz-launch-row"><div><span class="feature-kicker" id="quiz-selected-label">HUMAN HEART · EASY</span><p>3 multiple-choice questions · Instant feedback</p></div><button class="button button-primary" id="start-quiz">Start quiz <span>→</span></button></div>
+          </div>
+          <div class="quiz-question-card hidden" id="quiz-question-card">
+            <div class="quiz-progress"><span><b id="quiz-topic-label">HUMAN HEART · EASY</b> <span class="quiz-progress-divider">/</span> QUESTION <b id="quiz-question-number">01</b> / <span id="quiz-total-questions">03</span></span><span class="progress-track"><i id="quiz-progress-bar"></i></span></div>
+            <h2 id="quiz-question"></h2>
+            <div class="quiz-options" id="quiz-options"></div>
+            <div class="quiz-result" id="quiz-result" aria-live="polite"></div>
+            <div class="quiz-controls"><span id="quiz-score">SCORE 0 / 0</span><button class="button button-outline hidden" id="next-question">Next question →</button></div>
+          </div>
+        </section>
+
+        <section class="page content-width interior-page" id="page-model-detail" data-page="model-detail">
+          <button class="back-link" id="back-to-library">← Back to anatomy library</button>
+          <div class="detail-layout"><div class="detail-visual" id="detail-visual"><div class="detail-orbit"></div><div class="detail-symbol" id="detail-symbol">✳</div><span class="detail-visual-label">INTERACTIVE MODEL · 3D</span></div><div class="detail-copy"><div class="eyebrow"><span class="status-dot"></span> <span id="detail-category">ANATOMY</span></div><h1 id="detail-title">Anatomy structure</h1><p id="detail-description">Select a structure to load its clinical breakdown.</p><div class="detail-breakdown"><h3>CLINICAL BREAKDOWN</h3><ul id="detail-breakdown-list"></ul></div><button class="button button-primary" data-open-qr>Generate QR anchor <span>⌗</span></button></div></div>
+        </section>
+      </main>
+
+      <footer class="site-footer content-width"><span>© 2025 SURGICALAI LABS</span><span>BUILT FOR THE NEXT GENERATION OF CARE</span><a href="#home" data-page-link="home">BACK TO TOP ↑</a></footer>
+    </div>
+
+    <div class="modal-backdrop hidden" id="login-modal" role="presentation">
+      <section class="modal login-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+        <button class="modal-close" data-close-modal aria-label="Close dialog">×</button>
+        <div class="login-promo"><a class="brand" href="#home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 2.8 28 9.5v13L16 29.2 4 22.5v-13L16 2.8Z"/><path d="m4.5 9.8 11.5 6.7 11.5-6.7M16 16.5v12"/></svg></span><span>Surgical<span class="brand-accent">AI</span></span></a><div class="promo-content"><span class="promo-kicker">THE FUTURE IS IN YOUR HANDS</span><h2>Step into the future <span>of anatomy.</span></h2><p>A new dimension of understanding is only one step away.</p><div class="promo-decoration"><span>✳</span><i></i><b></b></div></div><span class="promo-foot">PRECISION MEETS POSSIBILITY</span></div>
+        <div class="login-form-panel"><div class="login-form-wrap"><div class="login-step">01 <span>/</span> ACCESS</div><h2 id="login-title">Secure access</h2><p class="form-intro">Sign in to enter your anatomy lab.</p><form id="login-form"><label for="email">EMAIL ADDRESS</label><div class="input-wrap"><span>✉</span><input type="email" id="email" name="email" value="rautmaithili99@gmail.com" required /></div><label for="password">PASSWORD</label><div class="input-wrap"><span>⌑</span><input type="password" id="password" name="password" value="Anatomy@2025" required /><button type="button" id="toggle-password" aria-label="Show password">◉</button></div><div class="form-options"><label class="remember-option"><input type="checkbox" checked /> Remember me</label><a href="#login">Need help?</a></div><button class="button button-primary login-submit" type="submit">Enter the lab <span>→</span></button><div class="form-security"><span>◇</span> YOUR SESSION IS SECURE AND ENCRYPTED</div></form><div class="authenticated-state hidden" id="authenticated-state"><span class="success-check">✓</span><h3>Authenticated</h3><p>Welcome back. Preparing your anatomy lab...</p><span class="auth-progress"><i></i></span></div></div></div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop hidden" id="qr-modal" role="presentation">
+      <section class="modal qr-modal" role="dialog" aria-modal="true" aria-labelledby="qr-title">
+        <button class="modal-close" data-close-modal aria-label="Close dialog">×</button>
+        <div class="modal-eyebrow"><span class="status-dot"></span> SPATIAL ANATOMY TOOL</div><h2 id="qr-title">Create an AR anchor.</h2><p class="qr-intro">Generate a high-resolution, scannable marker for any body part.</p>
+        <form id="qr-form"><label for="body-part">ANATOMICAL STRUCTURE</label><div class="qr-input-row"><input id="body-part" name="bodyPart" value="Human Heart" maxlength="100" placeholder="e.g. Human Heart, Femur" required /><button class="button button-primary" type="submit" id="generate-qr-button">Generate <span>↗</span></button></div></form>
+        <div class="qr-result hidden" id="qr-result" aria-live="polite"><div class="qr-image-frame"><img id="qr-image" alt="Generated QR code for the anatomical AR anchor" /></div><div class="qr-result-copy"><span class="feature-kicker">AR ANCHOR READY</span><h3 id="qr-result-title">Human Heart</h3><p>Scan this code to open the anatomy anchor in your spatial study environment.</p><a class="button button-outline" id="download-qr" download="surgicalai-ar-anchor.png">Download QR <span>↓</span></a></div></div>
+        <div class="qr-error hidden" id="qr-error" role="alert"></div><div class="qr-modal-foot"><span>⌗ &nbsp;HIGH-RESOLUTION · ERROR CORRECTION H</span><span>CYAN AR ANCHOR</span></div>
+      </section>
+    </div>
+    <div class="modal-backdrop hidden viewer-backdrop" id="modal3DViewer" role="presentation">
+      <section class="viewer-modal" role="dialog" aria-modal="true" aria-labelledby="viewer-title">
+        <header class="viewer-topbar"><a class="brand" href="#explore"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 2.8 28 9.5v13L16 29.2 4 22.5v-13L16 2.8Z"/><path d="m4.5 9.8 11.5 6.7 11.5-6.7M16 16.5v12"/></svg></span><span>Surgical<span class="brand-accent">AI</span></span></a><span class="viewer-top-status"><i></i> ANATOMY VIEWER / LIVE FEED</span><button class="modal-close" data-close-modal aria-label="Close 3D viewer">×</button></header>
+        <div class="viewer-layout">
+          <aside class="viewer-sidebar"><div class="viewer-system-label"><span class="status-dot"></span> <span id="viewer-category">CARDIOLOGY</span></div><h2 id="viewer-title">Human Heart</h2><p id="viewer-description">Interactive anatomical model.</p><a class="viewer-source-link hidden" id="viewer-source-link" href="#" target="_blank" rel="noopener noreferrer">OPEN ORIGINAL REFERENCE ↗</a><div class="viewer-spec-block"><span class="viewer-section-label">ANATOMICAL SPECIFICATIONS</span><div id="viewer-specs"></div></div><div class="viewer-stats"><span class="viewer-section-label">SYSTEM TELEMETRY</span><div class="viewer-stats-grid" id="viewer-stats-grid"></div></div><div class="viewer-feed"><i></i><span>ACTIVE FEED</span><b>STREAMING</b></div><div class="viewer-control-note"><span>DRAG</span> ROTATE <span>SCROLL</span> ZOOM</div></aside>
+          <div class="viewer-stage"><div class="viewer-stage-top"><span><i></i> 3D STRUCTURE RENDER</span><span id="viewer-model-code">SA / MDL-01</span></div><div class="viewer-canvas-wrap" id="viewer-canvas-wrap"><canvas id="anatomy-canvas" aria-label="Interactive 3D anatomical model"></canvas><div class="viewer-label-layer" id="viewer-label-layer" aria-label="Anatomy structure labels" aria-live="polite"><svg class="viewer-label-lines" id="viewer-label-lines" aria-hidden="true"></svg><div class="viewer-label-list" id="viewer-label-list"></div></div><div class="viewer-loading" id="viewer-loading"><i></i> INITIALIZING 3D ENGINE</div><div class="viewer-canvas-crosshair"></div></div><div class="viewer-stage-bottom"><span id="viewer-model-name">HUMAN HEART · ANTERIOR</span><span>ORBIT CONTROLS <i></i> ENABLED</span></div></div>
+        </div>
+      </section>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
